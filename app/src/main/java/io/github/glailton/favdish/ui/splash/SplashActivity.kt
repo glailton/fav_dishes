@@ -1,4 +1,4 @@
-package io.github.glailton.favdish
+package io.github.glailton.favdish.ui.splash
 
 import android.content.Intent
 import android.os.Build
@@ -10,6 +10,8 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import io.github.glailton.favdish.MainActivity
+import io.github.glailton.favdish.R
 import io.github.glailton.favdish.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
