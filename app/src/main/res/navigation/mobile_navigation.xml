@@ -17,15 +17,15 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="io.github.glailton.favdish.ui.dashboard.DashboardFragment"
+        android:name="io.github.glailton.favdish.ui.dish.favorite.RandomDishFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_favorite_dishes" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="io.github.glailton.favdish.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_random_dish" />
     <activity
         android:id="@+id/addUpdateDishActivity"
         android:name="io.github.glailton.favdish.ui.dish.add.AddUpdateDishActivity"

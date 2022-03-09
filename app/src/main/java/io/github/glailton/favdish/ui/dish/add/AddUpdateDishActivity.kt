@@ -42,9 +42,11 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.glailton.favdish.data.entities.FavDish
 import io.github.glailton.favdish.databinding.DialogCustomListBinding
 import io.github.glailton.favdish.ui.adapters.CustomListItemAdapter
 import io.github.glailton.favdish.ui.utils.Constants
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -353,6 +355,23 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                         }
                         TextUtils.isEmpty(cookingDirection) -> {
                             binding.etDirectionToCook.error = resources.getString(R.string.err_msg_enter_dish_cooking_directions)
+                        }
+                        else -> {
+                            val favDish: FavDish = FavDish(
+                                imagePath,
+                                Constants.DISH_IMAGE_SOURCE_LOCAL,
+                                title,
+                                type,
+                                category,
+                                ingredients,
+                                cookingTime,
+                                cookingDirection,
+                                false)
+
+                            addDishViewModel.insert(favDish)
+                            getString(R.string.add_fav_dish_success).toast(this)
+                            Timber.i("Fav Dish added successfully")
+                            finish()
                         }
                     }
                 }

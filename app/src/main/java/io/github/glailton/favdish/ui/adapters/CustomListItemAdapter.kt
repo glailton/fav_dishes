@@ -36,7 +36,7 @@ class CustomListItemAdapter(private val activity: Activity,
     }
 
     class ViewHolder(view: ItemCustomListBinding): RecyclerView.ViewHolder(view.root) {
-        val tvText = view.tvText
+        private val tvText = view.tvText
 
         fun bind(item: String) {
             tvText.text = item

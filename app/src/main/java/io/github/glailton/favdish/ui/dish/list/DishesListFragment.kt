@@ -2,17 +2,16 @@ package io.github.glailton.favdish.ui.dish.list
 
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
-import androidx.activity.viewModels
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.glailton.favdish.R
 import io.github.glailton.favdish.databinding.FragmentDishesListBinding
-import io.github.glailton.favdish.ui.dish.add.AddDishViewModel
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DishesListFragment : Fragment() {
@@ -36,10 +35,31 @@ class DishesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDishesListBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
+        return binding.root
+    }
 
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.rvDishesList.layoutManager = GridLayoutManager(requireContext(), 2)
+        val favDishesListAdapter = DishesListAdapter(this)
+        binding.rvDishesList.adapter = favDishesListAdapter
+
+        dishesListViewModel.allDishesList.observe(viewLifecycleOwner) { dishes ->
+            dishes.let {
+                if (it.isNotEmpty()){
+                    binding.rvDishesList.visibility = VISIBLE
+                    binding.tvNoDishesAddedYet.visibility = GONE
+
+                    favDishesListAdapter.setDishesList(it)
+                } else {
+                    binding.rvDishesList.visibility = GONE
+                    binding.tvNoDishesAddedYet.visibility = VISIBLE
+                }
+                favDishesListAdapter.setDishesList(it)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
