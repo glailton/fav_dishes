@@ -1,5 +1,6 @@
 package io.github.glailton.favdish.ui.dish.list
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -10,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.glailton.favdish.R
+import io.github.glailton.favdish.data.entities.FavDish
 import io.github.glailton.favdish.databinding.FragmentDishesListBinding
-import timber.log.Timber
+import io.github.glailton.favdish.ui.MainActivity
+import io.github.glailton.favdish.ui.adapters.FavDishesAdapter
 
 @AndroidEntryPoint
 class DishesListFragment : Fragment() {
@@ -19,9 +22,6 @@ class DishesListFragment : Fragment() {
     private val dishesListViewModel: DishesListViewModel by viewModels()
     private var _binding: FragmentDishesListBinding? = null
 
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +43,8 @@ class DishesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvDishesList.layoutManager = GridLayoutManager(requireContext(), 2)
-        val favDishesListAdapter = DishesListAdapter(this)
-        binding.rvDishesList.adapter = favDishesListAdapter
+        val favDishesAdapter = FavDishesAdapter(this)
+        binding.rvDishesList.adapter = favDishesAdapter
 
         dishesListViewModel.allDishesList.observe(viewLifecycleOwner) { dishes ->
             dishes.let {
@@ -52,13 +52,47 @@ class DishesListFragment : Fragment() {
                     binding.rvDishesList.visibility = VISIBLE
                     binding.tvNoDishesAddedYet.visibility = GONE
 
-                    favDishesListAdapter.setDishesList(it)
+                    favDishesAdapter.setDishesList(it)
                 } else {
                     binding.rvDishesList.visibility = GONE
                     binding.tvNoDishesAddedYet.visibility = VISIBLE
                 }
-                favDishesListAdapter.setDishesList(it)
+                favDishesAdapter.setDishesList(it)
             }
+        }
+    }
+
+    fun dishDetails(favDish: FavDish){
+        findNavController().navigate(DishesListFragmentDirections.actionNavigationDishesListToDishDetailsFragment(favDish))
+
+        if (requireActivity() is MainActivity){
+            (activity as MainActivity?)!!.hideBottomNavigationView()
+        }
+    }
+
+    fun deleteDish(favDish: FavDish){
+        val builder = AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.title_delete_dish))
+            .setMessage(getString(R.string.msg_delete_dish_dialog, favDish.title))
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(getString(R.string.lbl_yes)){ dialogInterface, _ ->
+                dishesListViewModel.delete(favDish)
+                dialogInterface.dismiss()
+            }
+            .setNegativeButton(getString(R.string.lbl_no)){ dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (requireActivity() is MainActivity) {
+            (activity as MainActivity?)!!.showBottomNavigationView()
         }
     }
 

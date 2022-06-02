@@ -1,4 +1,4 @@
-package io.github.glailton.favdish.ui.dish.favorite
+package io.github.glailton.favdish.ui.dish.random
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import io.github.glailton.favdish.databinding.FragmentRandomDishBinding
+import io.github.glailton.favdish.ui.dish.favorite.RandomDishViewModel
 
 class RandomDishFragment : Fragment() {
 

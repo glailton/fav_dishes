@@ -1,4 +1,4 @@
-package io.github.glailton.favdish.ui.dish.favorite
+package io.github.glailton.favdish.ui.dish.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +11,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteDishesViewModel @Inject constructor(private val favDishRepository: FavDishRepository): ViewModel() {
-    val allFavoriteDishes: LiveData<List<FavDish>> = favDishRepository.allFavoriteDishesList.asLiveData()
+class DishDetailsViewModel @Inject constructor(private val favDishRepository: FavDishRepository): ViewModel() {
+
+    fun update(dish: FavDish) = viewModelScope.launch {
+        favDishRepository.updateFavDishData(dish)
+    }
 }

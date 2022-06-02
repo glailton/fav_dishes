@@ -9,10 +9,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddDishViewModel @Inject constructor(private val favDishRepository: FavDishRepository)
-    : ViewModel() {
+class AddDishViewModel @Inject constructor(private val favDishRepository: FavDishRepository) :
+    ViewModel() {
 
-        fun insert(dish: FavDish) = viewModelScope.launch {
-            favDishRepository.insertFavDishData(dish)
-        }
+    fun insert(dish: FavDish) = viewModelScope.launch {
+        favDishRepository.insertFavDishData(dish)
+    }
+
+    fun update(dish: FavDish) = viewModelScope.launch {
+        favDishRepository.updateFavDishData(dish)
+    }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.glailton.favdish">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -17,7 +16,7 @@
         android:theme="@style/Theme.FavDish">
         <activity
             android:name=".ui.dish.add.AddUpdateDishActivity"
-            android:label="@string/add_dish"
+            android:label="@string/title_add_dish"
             android:theme="@style/Theme.FavDish.NoActionBar"
             android:configChanges="orientation"
             android:exported="false" />
