@@ -13,6 +13,9 @@ class FavDishRepository @Inject constructor(private val favDishDao: FavDishDao) 
     val allDishesList: Flow<List<FavDish>> = favDishDao.getAllDishes()
     val allFavoriteDishesList: Flow<List<FavDish>> = favDishDao.getAllFavoriteDishes()
 
+    fun filteredDishesList(filterType: String): Flow<List<FavDish>> =
+        favDishDao.getFilteredDishesList(filterType)
+
     @WorkerThread
     suspend fun insertFavDishData(favDish: FavDish){
         favDishDao.insertFavDishDetails(favDish)

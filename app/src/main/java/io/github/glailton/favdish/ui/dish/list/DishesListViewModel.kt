@@ -16,4 +16,7 @@ class DishesListViewModel @Inject constructor(private val favDishRepository: Fav
     fun delete(favDish: FavDish) = viewModelScope.launch {
         favDishRepository.deleteFavDishData(favDish)
     }
+
+    fun getFilteredDishesList(filterType: String): LiveData<List<FavDish>> =
+        favDishRepository.filteredDishesList(filterType).asLiveData()
 }

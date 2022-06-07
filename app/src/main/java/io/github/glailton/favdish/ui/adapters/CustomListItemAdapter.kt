@@ -3,11 +3,14 @@ package io.github.glailton.favdish.ui.adapters
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import io.github.glailton.favdish.databinding.ItemCustomListBinding
 import io.github.glailton.favdish.ui.dish.add.AddUpdateDishActivity
+import io.github.glailton.favdish.ui.dish.list.DishesListFragment
 
 class CustomListItemAdapter(private val activity: Activity,
+                            private val fragment: Fragment?,
                             private val listItems : List<String>,
                             private val selection: String):
     RecyclerView.Adapter<CustomListItemAdapter.ViewHolder>() {
@@ -27,6 +30,10 @@ class CustomListItemAdapter(private val activity: Activity,
         holder.itemView.setOnClickListener{
             if (activity is AddUpdateDishActivity){
                 activity.selectedListItem(item, selection)
+            }
+
+            if (fragment is DishesListFragment){
+                fragment.filterSelection(item)
             }
         }
     }

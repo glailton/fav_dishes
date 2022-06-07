@@ -240,7 +240,7 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvTitle.text = title
         binding.rvList.layoutManager = LinearLayoutManager(this)
 
-        val adapter = CustomListItemAdapter(this, items, selection)
+        val adapter = CustomListItemAdapter(this, null, items, selection)
         binding.rvList.adapter = adapter
 
         dialog = customListDialog.show()
