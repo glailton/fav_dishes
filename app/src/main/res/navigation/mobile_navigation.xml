@@ -29,10 +29,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_random_dishes"
+        android:id="@+id/navigation_random_dish"
         android:name="io.github.glailton.favdish.ui.dish.random.RandomDishFragment"
         android:label="@string/title_random_dish"
-        tools:layout="@layout/fragment_favorite_dishes">
+        tools:layout="@layout/fragment_random_dish">
     </fragment>
     <activity
         android:id="@+id/addUpdateDishActivity"

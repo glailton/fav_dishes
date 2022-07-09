@@ -1,5 +1,6 @@
 package io.github.glailton.favdish.ui.extensions
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.widget.ImageView
@@ -22,4 +23,12 @@ fun ImageView.loadImage(bitmap: Bitmap){
         .load(bitmap)
         .centerCrop()
         .into(this)
+}
+
+fun Dialog.showDialog() {
+    if (!this.isShowing) this.show()
+}
+
+fun Dialog.hideDialog() {
+    if (this.isShowing) this.dismiss()
 }

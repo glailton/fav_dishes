@@ -1,6 +1,7 @@
 package io.github.glailton.favdish.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -43,11 +44,13 @@ class MainActivity : AppCompatActivity() {
     fun hideBottomNavigationView(){
         binding.navView.clearAnimation()
         binding.navView.animate().translationY(binding.navView.height.toFloat()).duration = 300
+        binding.navView.visibility = View.GONE
     }
 
     fun showBottomNavigationView(){
         binding.navView.clearAnimation()
         binding.navView.animate().translationY(0f).duration = 300
+        binding.navView.visibility = View.VISIBLE
     }
 
 }
