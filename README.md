@@ -22,6 +22,7 @@ Also fetching data from the network and integrating persisted data in the databa
     - Room - construct a database using the abstract layer.
     - WorkManager - Schedule and execute deferrable, constraint-based background tasks.
     - Navigation - Build and structure your in-app UI, handle deep links, and navigate between screens.
+    - Notification - Provide short, timely information about events in your app while it's not in use.
 - Architecture
 -  MVVM Architecture (View - ViewModel - Model)
 -  Repository pattern
