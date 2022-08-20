@@ -11,7 +11,7 @@ object Constants {
     const val FILTER_SELECTION: String = "FilterSelection"
     const val API_ENDPOINT: String = "recipes/random"
     const val API_BASE_URL: String = "https://api.spoonacular.com"
-    const val API_KEY_VALUE: String = "61716dfaa25247e58b06422ad2acbd9b"
+    const val API_KEY_VALUE: String = ""
     const val API_KEY: String = "apiKey"
     const val LIMIT_LICENSE: String = "limitLicense"
     const val TAGS: String = "tags"
